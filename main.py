@@ -11,7 +11,7 @@ if len(sys.argv)>1:
 
         # print("script", script)
 
-if script['load_state']:
+    if script['load_state']:
             file_system.load_state(script['path'])
             print("state loaded successfully")
 
