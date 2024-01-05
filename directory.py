@@ -149,7 +149,7 @@ class Directory:
 
         if curr_dir is not None:
             file_name=path[-1]
-            if file_name and file_name.endswith(".txt"):
+            if file_name in curr_dir.files:
                 file=curr_dir.files[file_name]
                 if file: print(file.content)
                 else: print("Cannot read file, please check your file name again")
@@ -182,7 +182,7 @@ class Directory:
             serialized_data['subdirs'][subdir_name]=subdir.serialize()
 
         for file_name, file in self.files.items():
-            serialized_data['files'][file_name]=file
+            serialized_data['files'][file_name]=file.serialize()
 
         return serialized_data
     
@@ -194,7 +194,8 @@ class Directory:
             dir.subdirs[subdir_name]=subdir
 
         for file_name, file_data in data['files'].items():
-            file=self.deserialize(file_data)
+            file=File(file_data['name'])
+            file.deserialize(file_data)
             dir.files[file_name]=file
 
         return dir

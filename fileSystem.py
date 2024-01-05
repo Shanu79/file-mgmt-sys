@@ -11,9 +11,10 @@ class FileSystem:
         self.root_dir.add_directory(path)
 
     def cd(self, path):
-        new_dir=self.root_dir.change_directory(path)
+        temp=self.root_dir
+        self.root_dir=self.root_dir.change_directory(path)
         # print(self.root_dir!=temp)
-        return self.root_dir!=new_dir
+        return self.root_dir!=temp
 
     def ls(self, new_dir_name="."):
         self.root_dir.list_directories()
